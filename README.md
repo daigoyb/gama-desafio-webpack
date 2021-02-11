@@ -1,2 +1,0 @@
-# Gama-desafio-webpack
-
