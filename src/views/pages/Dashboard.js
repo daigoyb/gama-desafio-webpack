@@ -1,9 +1,9 @@
 import Nav from '../Components/Nav'
 import api from '../../service/api'
 import defaultHeader from '../../service/headerDefault'
-import { getCredentials } from '../../service/credentialService'
-import {completeDateGreet} from '../../service/dateService'
-import {createDepositForm} from '../../service/dashboardService'
+import { getCredentials, planosConta } from '../../service/credentialService'
+import { completeDateGreet } from '../../service/dateService'
+import { createDepositForm } from '../../service/dashboardService'
 
 let Dashboard = {
     render: async () => {
@@ -41,24 +41,33 @@ let Dashboard = {
 
     after_render: async () => {
         window.onload = getPlanosConta()
-        document.getElementById('btn-depositar').addEventListener('click', createDepositForm);
-        var formDeposit = document.getElementById('depositSubmit')
-        if (formDeposit){
-            formDeposit.addEventListener('submit', (e) => {
-                alert('entrou')
-                e.preventDefault(); 
-                debugger;
-                const {usuario:user} = getCredentials();
-                const login = getIdCredentials(user);
-                const tipoConta = document.getElementById('deposit-tipo-conta').value;
-                const date = document.getElementById('deposit-date').value;
-                const planoConta = document.getElementById('deposit-planos-conta').value;
-                const descricao = document.getElementById('deposit-descricao').value;
-                const valor = document.getElementById('deposit-valor').value;
-                realizarLancamento(tipoConta, login, date, descricao, planoConta, valor);
-            })
-        }
+        let btnDeposit = document.getElementById('btn-depositar')
+        btnDeposit.addEventListener('click', createDepositForm);
+        
+        // observador das mudanças da div function-content
+        const divContent = document.getElementById('function-content');
+        const config = {attributes: false, childList: true, subtree:true}
+        const observer = new MutationObserver((multations) => {
+            const formDeposit = document.getElementById('depositSubmit')
+            if(document.contains(formDeposit)){
+                console.log('submit atribuido')
+                formDeposit.addEventListener('submit', realizarDeposito);
+                observer.disconnect()
+            }
+        })
+        observer.observe(divContent, config)
 
+        async function realizarDeposito(event){
+            event.preventDefault(); 
+            const {usuario:user} = getCredentials();
+            const login = user.login;
+            const tipoConta = document.getElementById('deposit-tipo-conta').value;
+            const date = document.getElementById('deposit-date').value;
+            const planoConta = document.getElementById('deposit-planos-conta').value;
+            const descricao = document.getElementById('deposit-descricao').value;
+            const valor = document.getElementById('deposit-valor').value;
+            realizarLancamento(tipoConta, login, date, descricao, planoConta, valor);
+        }
 
         async function getPlanosConta(){
             const {token, usuario:user} = getCredentials();
