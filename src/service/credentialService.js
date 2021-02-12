@@ -1,4 +1,12 @@
 
+function planosConta(){
+    try {
+        const planos = window.localStorage.getItem('userPlanoConta')
+        return JSON.parse(planos);
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 function getCredentials(){
     try {
@@ -19,4 +27,4 @@ function getIdCredentials({login: login}){
     }
 }
 
-export {getCredentials, getIdCredentials}
+export {getCredentials, getIdCredentials, planosConta}

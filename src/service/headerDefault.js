@@ -2,7 +2,7 @@
 const defaultHeader = (token) => {
 
     const header = { 
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': token
     }
 

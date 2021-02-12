@@ -1,5 +1,5 @@
 import Utils from '../src/service/Utils'
-import './styles/style.scss';
+import './styles/style.scss'
 
 // Imports
 import Home from './views/pages/Home'

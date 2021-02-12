@@ -1,6 +1,7 @@
 import Nav from '../Components/Nav'
 import api from '../../service/api'
-import getCredentials from '../../service/credentialService'
+import {getCredentials} from '../../service/credentialService'
+import defaultHeader from '../../service/headerDefault'
 
 let Login = {
     render: async () => {
@@ -18,14 +19,15 @@ let Login = {
         return view
     },
     after_render: async () => {
+
         document.getElementById('loginForm').addEventListener('submit', e => {
             e.preventDefault()
             const login = document.getElementById('login').value;
             const passwd = document.getElementById('passwd').value;
 
-            postFormLogin(login, passwd);
+            postFormLogin(login, passwd)
         })
-
+        
         async function postFormLogin(login, senha){
             await api.post('login', {
                 senha: senha,
@@ -40,13 +42,9 @@ let Login = {
                     window.location.replace('#/Dashboard')
                 }
             }).catch (err => {
-                window.location.replace('#/Error') 
+                // window.location.replace('#/Error') 
                 console.log(err)
             }) 
-        }
-        async function getTipoContas(user){
-            const {token} = getCredentials()
-            await api.get('lacamentos/planos-conta')
         }
     }
 }

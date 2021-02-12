@@ -1,9 +1,20 @@
 import {curday} from './dateService'
-import api from './api'
+import {planosConta} from './credentialService'
 
+
+function createOptionPlanoConta(nomePlanoConta, valuePlanoConta){
+    setTimeout(() => {
+        let select = document.getElementById('deposit-planos-conta')
+        let option = document.createElement('option')
+        option.text = nomePlanoConta;
+        option.value = valuePlanoConta;
+        select.add(option)
+    }, 500)
+}
 
 function createDepositForm(){
     let content = document.getElementById('function-content');
+    let plc = planosConta();
     let currentDay = curday()
     content.innerHTML=
     `
@@ -14,6 +25,9 @@ function createDepositForm(){
                 <option value="CONTA BANCO">Conta Banco</option>
             </select>
             <input type="date" name="deposit-data" id="deposit-date" placeholder="dd/mm/yyyy" value=${currentDay} required>
+            <select name="planos-conta" id="deposit-planos-conta" required>
+                ${plc.map(plano => createOptionPlanoConta(plano.descricao, plano.id))}
+            </select>
             <input type="text" name="descricao" id="deposit-descricao" placeholder="Descrição" required>
             <input type="text" name="valor" id="deposit-valor" placeholder="Qual o valor da transferência?" required>
             <button type="submit">

@@ -1,7 +1,7 @@
 import Nav from '../Components/Nav'
 import api from '../../service/api'
 import defaultHeader from '../../service/headerDefault'
-import { getCredentials, getIdCredentials } from '../../service/credentialService'
+import { getCredentials } from '../../service/credentialService'
 import {completeDateGreet} from '../../service/dateService'
 import {createDepositForm} from '../../service/dashboardService'
 
@@ -40,26 +40,35 @@ let Dashboard = {
     },
 
     after_render: async () => {
+        window.onload = getPlanosConta()
         document.getElementById('btn-depositar').addEventListener('click', createDepositForm);
-        
-        async function realizarDeposito(){ 
-            const {usuario:user} = getCredentials();
-            const login = getIdCredentials(user);
-            const tipoConta = document.getElementById('deposit-tipo-conta').value;
-            const date = document.getElementById('deposit-date').value;
-            const descricao = document.getElementById('deposit-descricao').value;
-            const valor = document.getElementById('deposit-valor').value;
-            // realizarLancamento(tipoConta, login, date, descricao, valor)
+        var formDeposit = document.getElementById('depositSubmit')
+        if (formDeposit){
+            formDeposit.addEventListener('submit', (e) => {
+                alert('entrou')
+                e.preventDefault(); 
+                debugger;
+                const {usuario:user} = getCredentials();
+                const login = getIdCredentials(user);
+                const tipoConta = document.getElementById('deposit-tipo-conta').value;
+                const date = document.getElementById('deposit-date').value;
+                const planoConta = document.getElementById('deposit-planos-conta').value;
+                const descricao = document.getElementById('deposit-descricao').value;
+                const valor = document.getElementById('deposit-valor').value;
+                realizarLancamento(tipoConta, login, date, descricao, planoConta, valor);
+            })
         }
 
+
         async function getPlanosConta(){
-            const {usuario:user} = getCredentials();
-            const login = getIdCredentials(user);
-            await api.get(`lancamentos/planos-conta?login=${login}`, {
-                headers: defaultHeader()
+            const {token, usuario:user} = getCredentials();
+            await api.get(`lancamentos/planos-conta?login=${user.login}`, {
+                headers: defaultHeader(token)
             })
             .then( res => {
-                return res;
+                if(res.status === 200){
+                    window.localStorage.setItem('userPlanoConta', JSON.stringify(res.data))
+                }
             })
             .catch( err => {
                 console.log(err)
