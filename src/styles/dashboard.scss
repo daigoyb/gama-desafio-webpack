@@ -1,0 +1,49 @@
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+.content-default{
+    text-align: center;
+}
+
+
+.content-dashboard{
+
+}
+
+.content-conta{
+    display: block;
+    background-color: aliceblue;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#contas{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    margin: 0.3em;
+}
+
+aside{
+    position:absolute;
+    width: 10%;
+    display: grid;
+    left: 0%;
+    height: 100vh;
+    background-color: rgb(46, 221, 30);
+    border-radius: 25px;
+    justify-content: flex-start;
+    button{
+        height: 5em;
+        background-color: aliceblue;
+        color: black;
+        border-radius: 10px;
+        width: 100%;
+    }
+    
+}
+

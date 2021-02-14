@@ -9,7 +9,7 @@ function createOptionPlanoConta(nomePlanoConta, valuePlanoConta){
         option.text = nomePlanoConta;
         option.value = valuePlanoConta;
         select.add(option)
-    }, 500)
+    }, 300)
 }
 
 function createDepositForm(){
@@ -40,4 +40,14 @@ function createDepositForm(){
     `
 }
 
-export {createDepositForm}
+function createSuccessCard(){
+    let content = document.getElementById('function-content');
+    content.innerHTML = 
+    `
+    <div class='default-container success-card'>
+        <h2> Transação realizada com sucesso ! </h2>
+    </div>
+    `
+}
+
+export {createDepositForm, createSuccessCard}

@@ -1,5 +1,9 @@
 /* Aqui com scsss */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import './dashboard';
+@import './home';
+@import './nav.scss';
+@import './footer.scss';
 
 html {
   box-sizing: border-box;
@@ -25,35 +29,5 @@ body {
   }
 }
 
-.header {
-  h1 {
-    font-size: 3.5rem;
-  }
-}
 
-.example {
-  display: flex;
-  justify-content: center;
 
-  &-style,
-  &-lazy-load {
-    margin: 3rem 2rem;
-  }
-}
-
-.from-scss {
-  color: #0096FF;
-}
-
-.link {
-  color: #61dafb;
-  font-size: 2rem;
-  margin-top: 3rem;
-}
-
-#lazy-load {
-  padding: 1rem 1.5rem;
-  border: 0;
-  border-radius: 10rem;
-  outline: none;
-}
