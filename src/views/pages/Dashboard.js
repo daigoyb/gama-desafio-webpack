@@ -123,7 +123,7 @@ let Dashboard = {
             const planoConta = document.getElementById('transfer-planos-conta').value;
             const descricao = document.getElementById('transfer-descricao').value;
             const valor = document.getElementById('transfer-valor').value;
-            await realizarLancamento(tipoConta, outraConta, date, planoConta, descricao, valor)
+            await realizarLancamento(tipoConta, outraConta, date, descricao, planoConta, valor)
         }
 
         async function getPlanosConta(){

@@ -19,7 +19,7 @@ function createDepositForm(){
     content.innerHTML=
     `
         <h2>Realize seu Deposito</h2>
-        <form id='depositSubmit' class="dashboard-form">
+        <form id='depositSubmit' class="dashboard-form scale-up-ver-top">
             <select name="tipo-conta" id="deposit-tipo-conta" required>
                 <option value="CONTA CREDITO">Conta Crédito</option>
                 <option value="CONTA BANCO">Conta Banco</option>
@@ -48,7 +48,7 @@ function createTransferForm(){
     content.innerHTML=
     `
         <h2>Realize sua Transferência</h2>
-        <form id='transferSubmit' class="dashboard-form">
+        <form id='transferSubmit' class="dashboard-form scale-up-ver-top">
             <select name="tipo-conta" id="transfer-tipo-conta" required>
                 <option value="CONTA CREDITO">Conta Crédito</option>
                 <option value="CONTA BANCO">Conta Banco</option>
