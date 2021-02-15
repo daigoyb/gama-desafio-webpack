@@ -6,26 +6,58 @@ main{
 
 .content-default{
     text-align: center;
+    width: 75%;
 }
 
-
-.content-dashboard{
-
-}
 
 .content-conta{
-    display: block;
     background-color: aliceblue;
     color: black;
     padding: 10px;
     border-radius: 10px;
+    margin: 0 15px;
+    width: 200px;
 }
 
-#contas{
+.conta-data{
     display: flex;
-    justify-content: space-around;
     align-content: center;
-    margin: 0.3em;
+    margin: 20px;
+    justify-content: center;
+}
+
+.user-greeting{
+    width: 100%;
+    display: grid;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+#function-content{
+    margin: 15px;
+}
+
+.greeting-container{
+    display: flex;
+}
+
+.btn-user-service{
+    margin: 10px;
+    margin-top: 20px;
+    height: 50px;
+    width: 50px;
+    border: 0;
+    border-radius: 100%;
+    background-color: aliceblue;
+    cursor: pointer;
+    box-shadow: 7px 11px 18px -1px #da76fc;
+    &:hover{
+        background-color:lawngreen;
+        transition: 1s;
+    }
+    &:focus{
+        outline: none;
+    }
 }
 
 aside{
@@ -33,17 +65,99 @@ aside{
     width: 10%;
     display: grid;
     left: 0%;
-    height: 100vh;
+    height: 70vh;
     background-color: rgb(46, 221, 30);
     border-radius: 25px;
-    justify-content: flex-start;
+    justify-content:center;
+    align-items: center;
+    margin-left: 10px;
     button{
         height: 5em;
         background-color: aliceblue;
         color: black;
         border-radius: 10px;
         width: 100%;
+        border: 0;
+        box-shadow: 7px 11px 18px -1px #7ef788;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        cursor: pointer;
+        &:hover{
+            background-color: lawngreen;
+            transition: 1s;
+        }
+        &:focus{
+            outline: none;
+        }
+        i{
+            margin: 0;
+            padding: 10px 0;
+            font-size: 1.4em;
+        }
     }
-    
 }
 
+.dashboard-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    input{
+        background-color: aliceblue;
+        width: 80%;
+        border: 0;
+        height: 50px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        &:focus{
+            outline: none;
+        }
+    }
+    select{
+        width: 80%;
+        height: 50px;
+        border: 0;
+        background-color: aliceblue;
+        margin-bottom: 10px;
+        padding: 10px 25px 10px 10px;
+        border-radius: 10px;
+
+        &:focus{
+            outline: none;
+        }
+    }
+    button{
+        border: 0;
+        width: 70%;
+        height: 50px;
+        border-radius: 25px;
+        padding: 10px;
+        background-color: aliceblue;
+        cursor: pointer;
+        &:hover{
+            background-color: lawngreen;
+            transition: 1s;
+        }
+        &:focus{
+            outline: none;
+        }
+    }
+}
+
+.feedback-card{
+    i{
+        font-size: 2em;
+    }
+}
+
+@keyframes createForm{
+    0%{
+        height: 0%;
+    }
+    100%{
+        height: 100%;
+    }
+}

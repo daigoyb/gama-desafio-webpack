@@ -1,4 +1,4 @@
-import logo from "../../img/logo.png"
+import logo from '../../img/logo.png';
 
 
 let Nav = {
@@ -7,9 +7,9 @@ let Nav = {
             `
             <header>
                 <nav class="default-nav">
-                    <a href="#/"><img src="${logo}" width=291 height=65 alt=""></img></a>
-                    <a href="#/">Home</a>
-                    <a href="#/Login">Login</a>
+                    <a class="nav-a" href="#/"><img src="${logo}" width=291 height=65 alt=""></img></a>
+                    <a class="nav-a" href="#/">Home</a>
+                    <a class="nav-a" href="#/Login">Login</a>
                 </nav>
             </header>
             `

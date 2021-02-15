@@ -2,8 +2,11 @@
 let Footer = {
     render: async () => {
         let view = `
-            <h3> this is the footer </h3>
+            <footer>
+                2021
+            </footer>
         `
+        return view
     }
 }
 
