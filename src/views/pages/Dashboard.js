@@ -1,6 +1,12 @@
 import api from '../../service/api';
 import { getCredentials } from '../../service/credentialService';
-import { createDepositForm, createFailureCard, createSuccessCard, createTransferForm } from '../../service/dashboardService';
+import {
+    createDepositForm,
+    createFailureCard,
+    createPlanoContaCards,
+    createSuccessCard,
+    createTransferForm,
+} from '../../service/dashboardService';
 import { completeDateGreet } from '../../service/dateService';
 import defaultHeader from '../../service/headerDefault';
 import createLoaderDiv from '../../service/loaderService';
@@ -72,6 +78,8 @@ let Dashboard = {
         btnDeposit.addEventListener('click', createDepositForm);
         let btnTransfer = document.getElementById('btn-transferir')
         btnTransfer.addEventListener('click', createTransferForm)
+        let btnPlanoconta = document.getElementById('btn-contas')
+        btnPlanoconta.addEventListener('click', createPlanoContaCards)
 
         let btnReload = document.getElementById('btn-refresh');
         btnReload.addEventListener('click', e => {
@@ -89,10 +97,9 @@ let Dashboard = {
         // observador das mudanças da div function-content
         const divContent = document.getElementById('function-content');
         const config = {attributes: false, childList: true, subtree:true}
-        const observer = new MutationObserver((mutations) => {
+        const observer = new MutationObserver(() => {
             const formDeposit = document.getElementById('depositSubmit');
             const formTransfer = document.getElementById('transferSubmit');
-            console.log('mutations: ', mutations)
             if(document.contains(formDeposit)){
                 formDeposit.addEventListener('submit', realizarDeposito);
             }

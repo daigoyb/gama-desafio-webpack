@@ -37,7 +37,8 @@
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "axios": "^0.21.1",
-    "core-js": "3"
+    "core-js": "3",
+    "inputmask": "^5.0.5"
   },
   "browserslist": [
     "> 1%",

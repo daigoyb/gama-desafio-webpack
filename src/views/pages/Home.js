@@ -1,6 +1,8 @@
-import Nav from '../Components/Nav'
-import api from '../../service/api'
+import Inputmask from 'inputmask';
 
+import api from '../../service/api';
+import createLoaderDiv from '../../service/loaderService';
+import Nav from '../Components/Nav';
 
 let Home = {
     render: async () => {
@@ -8,10 +10,10 @@ let Home = {
         let view = 
         `
         ${nav}
-        <main >
+        <main>
             <div class="default-container landing-page1">
                 <section>
-                
+                    <h2>Fake Bank criado para o desafio da Gama Academy!</h2>
                 </section>
                 <section>
                     <form id="submitSignIn">
@@ -29,6 +31,7 @@ let Home = {
         return view
     },
     after_render: async () => {
+        maskCpf('form-cpf')
         document.getElementById('submitSignIn').addEventListener('submit', (e) => {
             e.preventDefault();
             const cpf = document.getElementById('form-cpf').value;
@@ -37,11 +40,18 @@ let Home = {
             const passwd = document.getElementById('form-passwd').value;
             const passwdAgain = document.getElementById('form-passwd-again').value;
             if (validateForm(cpf, name, user, passwd, passwdAgain)){
-                return postFormLogin(cpf, user, name, passwd);
+                postFormLogin(cpf, user, name, passwd);
             }
         })
 
-
+        function maskCpf(inputId){
+            Inputmask({ 
+                mask: "999.999.999-99",
+                placeholder: '1',
+                allowMinus: false
+            }
+                ).mask(document.getElementById(inputId))
+        }
         function validateForm(cpf, name, user, passwd, passwdAgain){
             if(passwd === passwdAgain && passwd.length > 0){
                 return true
@@ -49,6 +59,7 @@ let Home = {
         }
 
         async function postFormLogin(cpf, login, nome, senha){
+            createLoaderDiv('submitSignIn')
             await api.post('usuarios', {
                 cpf: cpf,
                 login: login,

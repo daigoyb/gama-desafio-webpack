@@ -4,11 +4,13 @@
 @import './home';
 @import './nav.scss';
 @import './footer.scss';
+@import './login.scss';
 
 html {
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
 }
 
 *,

@@ -1,21 +1,13 @@
+import Inputmask from 'inputmask';
+
 import { planosConta } from './credentialService';
 import { curday } from './dateService';
 
 
-function createOptionPlanoConta(elemId, nomePlanoConta, valuePlanoConta){
-    setTimeout(() => {
-        let select = document.getElementById(elemId)
-        let option = document.createElement('option')
-        option.text = nomePlanoConta;
-        option.value = valuePlanoConta;
-        select.add(option)
-    }, 100)
-}
-
 function createDepositForm(){
     let content = document.getElementById('function-content');
     let plc = planosConta();
-    let currentDay = curday()
+    let currentDay = curday();
     content.innerHTML=
     `
         <h2>Realize seu Deposito</h2>
@@ -38,7 +30,43 @@ function createDepositForm(){
             </button>
         </form>
     `
+    maskValor('deposit-valor')
     content.scrollIntoView()
+}
+
+function createPlanoContaCards(){
+    let plc = planosConta();
+    let content = document.getElementById('function-content');
+    content.innerHTML = 
+    `
+        <div class="planos-conta-container" id="planos-conta">
+            ${plc.map(plano => createPlanoContaCard(plano.id, plano.descricao, plano.login))}
+        </div>
+    `
+    content.scrollIntoView()
+}
+
+function createPlanoContaCard(id, descricao, login){
+    setTimeout(() => {
+        let planoContaContainer = document.getElementById('planos-conta')
+
+        let card = document.createElement('div')
+        card.className = 'plano-conta-card flip-in-hor-bottom'
+
+        let title = document.createElement('h3')
+        title.innerText = descricao
+
+        let tipo = document.createElement('p')
+        tipo.innerText = "id: " + id
+
+        let dono = document.createElement('p')
+        dono.innerText = "login: " + login
+
+        card.appendChild(title)
+        card.appendChild(tipo)
+        card.appendChild(dono)
+        planoContaContainer.appendChild(card)
+    }, 200)
 }
 
 function createTransferForm(){
@@ -68,6 +96,7 @@ function createTransferForm(){
             </button>
         </form>
     `
+    maskValor('transfer-valor')
     content.scrollIntoView()
 }
 
@@ -93,4 +122,29 @@ function createFailureCard(){
     `
 }
 
-export {createDepositForm, createTransferForm, createSuccessCard, createFailureCard}
+function createOptionPlanoConta(elemId, nomePlanoConta, valuePlanoConta){
+    setTimeout(() => {
+        let select = document.getElementById(elemId)
+        let option = document.createElement('option')
+        option.text = nomePlanoConta;
+        option.value = valuePlanoConta;
+        select.add(option)
+    }, 100)
+}
+
+function maskValor(inputId){
+    Inputmask('currency', {
+        autoUnmask: true,
+        alias: 'numeric',
+        groupSeparator: ',',
+        autoGroup: true,
+        digits: 2,
+        radixPoint: '.',
+        digitsOptional: false,
+        allowMinus: false,
+        prefix: 'R$ ',
+        rightAlign: false
+    }).mask(document.getElementById(inputId))
+}
+
+export {createDepositForm, createTransferForm, createSuccessCard, createFailureCard, createPlanoContaCards}

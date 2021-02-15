@@ -1,20 +1,24 @@
-import Nav from '../Components/Nav'
-import api from '../../service/api'
-import {getCredentials} from '../../service/credentialService'
-import defaultHeader from '../../service/headerDefault'
+import api from '../../service/api';
+import createLoaderDiv from '../../service/loaderService';
+import Footer from '../Components/Footer';
+import Nav from '../Components/Nav';
 
 let Login = {
     render: async () => {
         let nav = await Nav.render()
+        let footer = await Footer.render()
         let view = 
         `
             ${nav}
-            <h1>Login page</h1>
-            <form id="loginForm">
-                <input type="text" id="login" placeholder="usuário" required>
-                <input type="password" id="passwd" placeholder="senha" required>
-                <input type="submit" value="Login">
-            </form>
+            <main id="login-main-content" class='login-content'>
+                <h1>Login</h1>
+                <form id="loginForm">
+                    <input type="text" id="login" placeholder="usuário" required>
+                    <input type="password" id="passwd" placeholder="senha" required>
+                    <button type=submit> Logar </button>
+                </form>
+            </main>
+            ${footer}
         `
         return view
     },
@@ -22,6 +26,7 @@ let Login = {
 
         document.getElementById('loginForm').addEventListener('submit', e => {
             e.preventDefault()
+
             const login = document.getElementById('login').value;
             const passwd = document.getElementById('passwd').value;
 
@@ -29,6 +34,7 @@ let Login = {
         })
         
         async function postFormLogin(login, senha){
+            createLoaderDiv('login-main-content')
             await api.post('login', {
                 senha: senha,
                 usuario: login,
